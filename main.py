@@ -80,5 +80,9 @@ async def help(ctx):
         return
     await ctx.send("Commands for")
 
+@bot.command(name="currentword", help="shows the current selected word.")
+async def currentword(ctx):
+    await ctx.send(word_of_the_day)
+
 
 bot.run(token)
