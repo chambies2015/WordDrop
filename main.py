@@ -68,17 +68,11 @@ async def guess(ctx, *, user_word):
 
 @bot.command(name="listwords", help="Show all possible 5-letter words.")
 async def list_words(ctx):
-    if ctx.channel.id != accepted_channels:
+    if ctx.channel.id != 1090828602397970472:
         return
     file_to_upload = File("five_letter_words.txt", filename="five_letter_words.txt")
     await ctx.send("All possible words:", file=file_to_upload)
 
-
-@bot.command(name="nebulahelp")
-async def help(ctx):
-    if ctx.channel.id != accepted_channels:
-        return
-    await ctx.send("Commands for")
 
 @bot.command(name="currentword", help="shows the current selected word.")
 async def currentword(ctx):
