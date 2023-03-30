@@ -7,6 +7,8 @@ import creds
 
 token = creds.bot_token
 
+accepted_channels = [1090828602397970472]
+
 
 def read_five_letter_words(filename):
     with open(filename, "r") as file:
@@ -39,8 +41,10 @@ async def change_word():
     word_of_the_day = random.choice(five_letter_words)
 
 
-@bot.command(name="guess")
+@bot.command(name="guess", help="Used to guess the 5-letter word.")
 async def guess(ctx, *, user_word):
+    if ctx.channel.id != accepted_channels:
+        return
     user_word = user_word.lower()
     response = ""
 
@@ -64,10 +68,18 @@ async def guess(ctx, *, user_word):
 from discord import File
 
 
-@bot.command(name="listwords")
+@bot.command(name="listwords", help="Show all possible 5-letter words.")
 async def list_words(ctx):
+    if ctx.channel.id != accepted_channels:
+        return
     file_to_upload = File("five_letter_words.txt", filename="five_letter_words.txt")
     await ctx.send("All possible words:", file=file_to_upload)
+
+@bot.command(name="nebulahelp")
+async def help(ctx):
+    if ctx.channel.id != accepted_channels:
+        return
+    await ctx.send("Commands for")
 
 
 bot.run(token)
