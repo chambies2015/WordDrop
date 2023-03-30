@@ -4,6 +4,7 @@ import discord
 from discord.ext import commands, tasks
 from discord import Embed
 import creds
+from discord import File
 
 token = creds.bot_token
 
@@ -65,15 +66,13 @@ async def guess(ctx, *, user_word):
     await ctx.send(response)
 
 
-from discord import File
-
-
 @bot.command(name="listwords", help="Show all possible 5-letter words.")
 async def list_words(ctx):
     if ctx.channel.id != accepted_channels:
         return
     file_to_upload = File("five_letter_words.txt", filename="five_letter_words.txt")
     await ctx.send("All possible words:", file=file_to_upload)
+
 
 @bot.command(name="nebulahelp")
 async def help(ctx):
