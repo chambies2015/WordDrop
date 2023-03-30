@@ -3,15 +3,16 @@ import random
 import discord
 from discord.ext import commands, tasks
 from discord import Embed
-from dotenv import load_dotenv
 import creds
 
 token = creds.bot_token
+
 
 def read_five_letter_words(filename):
     with open(filename, "r") as file:
         words = [line.strip() for line in file]
     return words
+
 
 filename = "five_letter_words.txt"
 five_letter_words = read_five_letter_words(filename)
@@ -24,6 +25,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
 word_of_the_day = random.choice(five_letter_words)
+
 
 @bot.event
 async def on_ready():
@@ -56,14 +58,16 @@ async def guess(ctx, *, user_word):
         response = f"Your guess: {user_word}\nCorrect characters: {' '.join(correct_chars)}"
         response = f"```\n{response}\n```"
 
-
     await ctx.send(response)
 
+
 from discord import File
+
 
 @bot.command(name="listwords")
 async def list_words(ctx):
     file_to_upload = File("five_letter_words.txt", filename="five_letter_words.txt")
     await ctx.send("All possible words:", file=file_to_upload)
+
 
 bot.run(token)
