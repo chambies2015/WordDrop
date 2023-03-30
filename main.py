@@ -8,7 +8,7 @@ from discord import File
 
 token = creds.bot_token
 
-accepted_channels = [1090828602397970472]
+accepted_channels = ['1090828602397970472']
 
 
 def read_five_letter_words(filename):
@@ -44,7 +44,7 @@ async def change_word():
 
 @bot.command(name="guess", help="Used to guess the 5-letter word.")
 async def guess(ctx, *, user_word):
-    if ctx.channel.id != accepted_channels:
+    if ctx.channel.id != 1090828602397970472:
         return
     user_word = user_word.lower()
     response = ""
